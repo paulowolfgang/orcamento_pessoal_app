@@ -3,10 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Faker\Factory;
+use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
@@ -17,14 +15,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Factory::create('pt_BR');
-
-        DB::table('users')->insert([
-            'name' => $faker->name,
-            'email' => $faker->email,
-            'email_verified_at' => now(),
-            'password' => bcrypt('12345'),
-            'remember_token' => Str::random(10)
-        ]);
+        // Model User
+        User::factory()->count(5)->create();
     }
 }
