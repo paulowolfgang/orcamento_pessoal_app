@@ -7,7 +7,7 @@
                 <h3>Categorias</h3>
             </div>
             <div class="col-4" style="text-align: right;">
-                <button type="button" class="btn btn-success">Nova categoria</button>
+                <button type="button" class="btn btn-success"><i class="fa-solid fa-circle-plus"></i> Nova categoria</button>
             </div>
         </div>
     </div>
@@ -22,19 +22,19 @@
             <tbody>
                 <tr>
                     <td>Casa</td>
-                    <td><a href="#">Excluir</a></td>
+                    <td><a href="#"><i class="fa-solid fa-trash-can"></a></td>
                 </tr>
                 <tr>
                     <td>Educação</td>
-                    <td><a href="#">Excluir</a></td>
+                    <td><a href="#"><i class="fa-solid fa-trash-can"></a></td>
                 </tr>
                 <tr>
                     <td>Transporte</td>
-                    <td><a href="#">Excluir</a></td>
+                    <td><a href="#"><i class="fa-solid fa-trash-can"></a></td>
                 </tr>
                 <tr>
                     <td>Lazer</td>
-                    <td><a href="#">Excluir</a></td>
+                    <td><a href="#"><i class="fa-solid fa-trash-can"></a></td>
                 </tr>
             </tbody>
         </table>
