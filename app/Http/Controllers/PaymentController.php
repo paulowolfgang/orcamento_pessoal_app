@@ -28,7 +28,7 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        //
+        return view('payments.create');
     }
 
     /**

@@ -7,7 +7,7 @@
                 <h3>Pagamentos</h3>
             </div>
             <div class="col-4" style="text-align: right;">
-                <button type="button" class="btn btn-success"><i class="fa-solid fa-circle-plus"></i> Novo pagamento</button>
+                <a class="btn btn-success" href="{{route('payment.create')}}" role="button"><i class="fa-solid fa-circle-plus"></i> Novo pagamento</a>
             </div>
         </div>
     </div>
@@ -30,6 +30,7 @@
                     <td>Aberta</td>
                     <td>
                         <a href="#"><i class="fa-solid fa-eye"></i></a>
+                        <a href="#"><i class="fa-solid fa-pencil"></i></a>
                         <a href="#"><i class="fa-solid fa-trash-can"></i></a>
                     </td>
                 </tr>
@@ -40,6 +41,7 @@
                     <td>Aberta</td>
                     <td>
                         <a href="#"><i class="fa-solid fa-eye"></i></a>
+                        <a href="#"><i class="fa-solid fa-pencil"></i></a>
                         <a href="#"><i class="fa-solid fa-trash-can"></i></a>
                     </td>
                 </tr>
@@ -50,6 +52,7 @@
                     <td>Fechada</td>
                     <td>
                         <a href="#"><i class="fa-solid fa-eye"></i></a>
+                        <a href="#"><i class="fa-solid fa-pencil"></i></a>
                         <a href="#"><i class="fa-solid fa-trash-can"></i></a>
                     </td>
                 </tr>
