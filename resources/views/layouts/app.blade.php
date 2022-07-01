@@ -53,6 +53,14 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Categorias</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Pagamentos</a>
+                            </li>
+                            </li>
+                            <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
