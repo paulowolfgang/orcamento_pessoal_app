@@ -7,7 +7,7 @@
                 <h3>Novo Pagamento</h3>
             </div>
             <div class="col-4" style="text-align: right;">
-            <a class="btn btn-primary" href="{{route('payment.index')}}" role="button"><i class="fa-solid fa-circle-left"></i> Voltar</a>
+                <a class="btn btn-primary" href="{{route('payment.index')}}" role="button"><i class="fa-solid fa-circle-left"></i> Voltar</a>
             </div>
         </div>
     </div>
