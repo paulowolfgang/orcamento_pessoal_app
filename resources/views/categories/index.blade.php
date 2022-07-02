@@ -29,9 +29,9 @@
                     <td><a href="#"><i class="fa-solid fa-trash-can"></a></td>
                 </tr>
             @empty
-            <tr>
-                <td colspan="7" class="text-center">Não há categorias cadastradas.</td>
-            </tr>
+                <tr>
+                    <td colspan="7" class="text-center">Não há categorias cadastradas.</td>
+                </tr>
             @endforelse
             </tbody>
         </table>

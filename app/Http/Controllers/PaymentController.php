@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Payment;
 
 class PaymentController extends Controller
 {
@@ -18,7 +19,9 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        return view('payments.index');
+        $payments = Payment::all();
+
+        return view('payments.index', compact('payments'));
     }
 
     /**
@@ -28,6 +31,7 @@ class PaymentController extends Controller
      */
     public function create()
     {
+
         return view('payments.create');
     }
 

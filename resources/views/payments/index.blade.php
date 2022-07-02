@@ -23,39 +23,23 @@
                 </tr>
             </thead>
             <tbody>
+            @forelse($payments as $row)
                 <tr>
-                    <td>Conta de luz</td>
-                    <td>R$ 119,90</td>
-                    <td>10/07/2022</td>
-                    <td>Aberta</td>
+                    <td>{{$row->description}}</td>
+                    <td>{{$row->value}}</td>
+                    <td>{{$row->date_vue}}</td>
+                    <td>{{$row->status}}</td>
                     <td>
                         <a href="#"><i class="fa-solid fa-eye"></i></a>
                         <a href="#"><i class="fa-solid fa-pencil"></i></a>
                         <a href="#"><i class="fa-solid fa-trash-can"></i></a>
                     </td>
                 </tr>
+            @empty
                 <tr>
-                    <td>Conta de água</td>
-                    <td>R$ 69,90</td>
-                    <td>07/07/2022</td>
-                    <td>Aberta</td>
-                    <td>
-                        <a href="#"><i class="fa-solid fa-eye"></i></a>
-                        <a href="#"><i class="fa-solid fa-pencil"></i></a>
-                        <a href="#"><i class="fa-solid fa-trash-can"></i></a>
-                    </td>
+                    <td colspan="7" class="text-center">Não há pagamentos cadastrados.</td>
                 </tr>
-                <tr>
-                    <td>Futebol com os amigos</td>
-                    <td>R$ 50,00</td>
-                    <td>01/07/2022</td>
-                    <td>Fechada</td>
-                    <td>
-                        <a href="#"><i class="fa-solid fa-eye"></i></a>
-                        <a href="#"><i class="fa-solid fa-pencil"></i></a>
-                        <a href="#"><i class="fa-solid fa-trash-can"></i></a>
-                    </td>
-                </tr>
+            @endforelse
             </tbody>
         </table>
     </div>
