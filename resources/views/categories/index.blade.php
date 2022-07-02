@@ -46,17 +46,33 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <div class="mb-3">
-                <label for="exampleInput" class="form-label">Nome da categoria</label>
-                <input type="text" class="form-control" id="categorieName">
-                <div id="categorieHelp" class="form-text">Cadastre o nome da nova categoria, exemplo: Transporte...</div>
-            </div>
+                <div class="mb-3">
+                    <form action="" class="formData">
+                        <label for="exampleInput" class="form-label">Nome da categoria</label>
+                        <input type="text" class="form-control" name="categorieName">
+                        <div id="categorieHelp" class="form-text">Cadastre o nome da nova categoria, exemplo: Transporte...</div>
+
+                        <button type="submit" class="btn btn-success mt-3"><i class="fa-solid fa-circle-plus"></i> Cadastrar</button>
+                    </form>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                <a class="btn btn-success" href="#" role="button"><i class="fa-solid fa-circle-plus"></i> Cadastrar</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-circle-xmark"></i> Fechar</button>
             </div>
             </div>
         </div>
     </div>
 @endsection
+
+<!-- ### jQuery ### -->
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+
+<script>
+    $(function()
+    {   
+        $('.formData').submit(function(){
+            event.preventDefault();
+            console.log($(this).serialize());
+        });
+    });
+</script>
