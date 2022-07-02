@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Categorie;
 
 class CategorieController extends Controller
 {
@@ -18,7 +19,9 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        return view('categories.index');
+        $categories = Categorie::all();
+
+        return view('categories.index', compact('categories'));
     }
 
     /**

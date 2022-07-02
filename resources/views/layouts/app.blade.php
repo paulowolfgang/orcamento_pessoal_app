@@ -56,12 +56,15 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{route('categorie.index')}}">Categorias</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{route('payment.index')}}">Pagamentos</a>
-                            </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('dashboard')}}">Início</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('categorie.index')}}">Categorias</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('payment.index')}}">Pagamentos</a>
+                                </li>
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

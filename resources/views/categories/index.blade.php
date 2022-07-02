@@ -23,22 +23,16 @@
                 </tr>
             </thead>
             <tbody>
+            @forelse($categories as $row)
                 <tr>
-                    <td>Casa</td>
+                    <td>{{$row->name}}</td>
                     <td><a href="#"><i class="fa-solid fa-trash-can"></a></td>
                 </tr>
-                <tr>
-                    <td>Educação</td>
-                    <td><a href="#"><i class="fa-solid fa-trash-can"></a></td>
-                </tr>
-                <tr>
-                    <td>Transporte</td>
-                    <td><a href="#"><i class="fa-solid fa-trash-can"></a></td>
-                </tr>
-                <tr>
-                    <td>Lazer</td>
-                    <td><a href="#"><i class="fa-solid fa-trash-can"></a></td>
-                </tr>
+            @empty
+            <tr>
+                <td colspan="7" class="text-center">Não há categorias cadastradas.</td>
+            </tr>
+            @endforelse
             </tbody>
         </table>
     </div>
