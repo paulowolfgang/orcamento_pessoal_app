@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+
 use App\Models\Categorie;
 
 class CategorieController extends Controller
@@ -43,7 +45,21 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $id_user   = Auth::id();
+
+        Validator::make($request->all(),[
+            'name' => 'required|max:50',
+        ], $messages  =[
+            'name.required' => 'O campo nome da categoria é obrigatório',
+            'name.max' => 'O campo nome da categoria deve ter no máximo 50 caracteres',
+        ])->validate();
+
+        $categorie = new Categorie();
+
+        $categorie->name = $request->name;
+        $categorie->id_user   = $id_user;
+
+        $categorie->save();
     }
 
     /**

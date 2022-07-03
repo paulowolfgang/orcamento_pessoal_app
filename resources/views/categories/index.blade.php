@@ -75,15 +75,16 @@
             event.preventDefault();
             //console.log($(this).serialize());
             $.ajax({
-                url: "{{ route('payment.store') }}",
+                url: "{{ route('categorie.store') }}",
                 type: "post",
                 data: $(this).serialize(),
                 dataType: 'json',
                 success: function(response){
                     if(response.success == true){
-                        console.log("Teste Ok: " + response.message);
+                        var url = '{{ route("categorie.index") }}';
+                        window.location.href = url;
                     }else{
-                        console.log("Teste falhou: " + response.message);
+                        //
                     }
                 }
             });
