@@ -25,7 +25,7 @@
             <tbody>
             @forelse($categories as $row)
                 <tr>
-                    <td>{{$row->name}}</td>
+                    <td>{{ $row->name }}</td>
                     <td><a href="#"><i class="fa-solid fa-trash-can"></a></td>
                 </tr>
             @empty
@@ -48,8 +48,9 @@
             <div class="modal-body">
                 <div class="mb-3">
                     <form action="" class="formData">
+                        @csrf
                         <label for="exampleInput" class="form-label">Nome da categoria</label>
-                        <input type="text" class="form-control" name="categorieName">
+                        <input type="text" class="form-control" name="name">
                         <div id="categorieHelp" class="form-text">Cadastre o nome da nova categoria, exemplo: Transporte...</div>
 
                         <button type="submit" class="btn btn-success mt-3"><i class="fa-solid fa-circle-plus"></i> Cadastrar</button>
@@ -72,7 +73,20 @@
     {   
         $('.formData').submit(function(){
             event.preventDefault();
-            console.log($(this).serialize());
+            //console.log($(this).serialize());
+            $.ajax({
+                url: "{{ route('payment.store') }}",
+                type: "post",
+                data: $(this).serialize(),
+                dataType: 'json',
+                success: function(response){
+                    if(response.success == true){
+                        console.log("Teste Ok: " + response.message);
+                    }else{
+                        console.log("Teste falhou: " + response.message);
+                    }
+                }
+            });
         });
     });
 </script>

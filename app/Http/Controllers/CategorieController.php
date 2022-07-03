@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Categorie;
 
 class CategorieController extends Controller
@@ -42,7 +43,7 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**

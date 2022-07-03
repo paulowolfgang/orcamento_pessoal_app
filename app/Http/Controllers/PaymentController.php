@@ -43,7 +43,28 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $categorie = $request->input('name');
+
+        $status_request = false;
+
+        if($categorie){
+            $status_request = true;
+        }
+
+        if($status_request)
+        {   
+            $value_return['success'] = true;
+            $value_return['message'] = "Fluxo de requisição realizado com sucesso!";
+
+            echo json_encode($value_return);
+            return;  
+        }else{
+            $value_return['success'] = false;
+            $value_return['message'] = "Houve uma falha no fluxo de requisição!";
+
+            echo json_encode($value_return);
+            return;
+        }
     }
 
     /**
