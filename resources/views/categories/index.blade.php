@@ -3,14 +3,20 @@
 @section('content')
     <div class="container col-lg-12 mt-5 mb-5">
         <div class="row">
+
+            <!-- ### Success message div ### -->
+            <div id="successMessage"></div>
+            
             <div class="col-8">
                 <h3>Categorias</h3>
             </div>
             <div class="col-4" style="text-align: right;">
-                <!-- Button trigger modal -->
+
+                <!-- ### Button trigger modal ### -->
                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#saveCategorieModal">
                     <i class="fa-solid fa-circle-plus"></i> Nova categoria
                 </button>
+            
             </div>
         </div>
     </div>
@@ -37,27 +43,30 @@
         </table>
     </div>
 
-    <!-- ### Modal de cadastro de categoria ### -->
+    <!-- ### Category registration modal ### -->
     <div class="modal fade" id="saveCategorieModal" tabindex="-1" aria-labelledby="saveCategorieModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Cadastrar Nova Categoria</h5>
+                <h5 class="modal-title">Cadastrar Nova Categoria</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                
+                <!-- ### Modal error message ### -->
+                <ul id="errorMessage"></ul>
+
                 <div class="mb-3">
-                    <form action="" class="formData">
+                    <form action="{{ route('categorie.store') }}" class="formData" id="formData" enctype="multipart/form-data">
                         @csrf
                         <label for="exampleInput" class="form-label">Nome da categoria</label>
-                        <input type="text" class="form-control" name="name">
+                        <input type="text" class="name form-control">
                         <div id="categorieHelp" class="form-text">Cadastre o nome da nova categoria, exemplo: Transporte...</div>
-
-                        <button type="submit" class="btn btn-success mt-3"><i class="fa-solid fa-circle-plus"></i> Cadastrar</button>
                     </form>
                 </div>
             </div>
             <div class="modal-footer">
+                <button type="submit" class="btn btn-success saveCategorie"><i class="fa-solid fa-circle-plus"></i> Cadastrar</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-circle-xmark"></i> Fechar</button>
             </div>
             </div>
@@ -69,22 +78,43 @@
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 
 <script>
-    $(function()
-    {   
-        $('.formData').submit(function(){
-            event.preventDefault();
-            //console.log($(this).serialize());
+    $(document).ready(function (){
+        $(document).on('click', '.saveCategorie', function(e){
+            e.preventDefault();
+            //console.log("Event button Ok..");
+            var data  = {
+                'name': $('.name').val(),
+            }
+            //console.log(data);
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
             $.ajax({
-                url: "{{ route('categorie.store') }}",
-                type: "post",
-                data: $(this).serialize(),
-                dataType: 'json',
+                type: "POST",
+                url: "/categorie",
+                data: data,
+                dataType: "json",
                 success: function(response){
-                    if(response.success == true){
-                        var url = '{{ route("categorie.index") }}';
-                        window.location.href = url;
-                    }else{
-                        //
+                    //console.log(response.errors.name);
+                    if(response.status == 400)
+                    {   
+                        $('#errorMessage').html("");
+                        $('#errorMessage').addClass('alert alert-danger');
+                        $.each(response.errors, function(key, errValues){
+                            $('#errorMessage').append('<div class="p-2"><li>' + errValues + '</li></div>');
+                        });
+                    }
+                    else
+                    {
+                        $('#errorMessage').html("");
+                        $('#successMessage').addClass('alert alert-success');
+                        $('#successMessage').text(response.message);
+                        $('#saveCategorieModal').modal('hide');
+                        $('#saveCategorieModal').find('input').val("");
                     }
                 }
             });

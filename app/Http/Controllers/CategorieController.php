@@ -44,22 +44,33 @@ class CategorieController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $id_user   = Auth::id();
-
-        Validator::make($request->all(),[
+    {   
+        $validator = Validator::make($request->all(),[
             'name' => 'required|max:50',
-        ], $messages  =[
-            'name.required' => 'O campo nome da categoria é obrigatório',
-            'name.max' => 'O campo nome da categoria deve ter no máximo 50 caracteres',
-        ])->validate();
+        ]);
 
-        $categorie = new Categorie();
+        if($validator->fails())
+        {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->messages()
+            ]);
+        }
+        else
+        {
+            $id_user = Auth::id();
+            $categorie = new Categorie();
+            
+            $categorie->id_user = $id_user;
+            $categorie->name = $request->input('name');
+            
+            $categorie->save();
 
-        $categorie->name = $request->name;
-        $categorie->id_user   = $id_user;
-
-        $categorie->save();
+            return response()->json([
+                'status' => 200,
+                'message' => 'Categoria cadastrada com sucesso!'
+            ]);
+        }
     }
 
     /**
