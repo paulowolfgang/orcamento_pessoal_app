@@ -29,16 +29,6 @@
                 </tr>
             </thead>
             <tbody>
-            @forelse($categories as $row)
-                <tr>
-                    <td>{{ $row->name }}</td>
-                    <td><a href="#"><i class="fa-solid fa-trash-can"></a></td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="7" class="text-center">Não há categorias cadastradas.</td>
-                </tr>
-            @endforelse
             </tbody>
         </table>
     </div>
@@ -79,6 +69,27 @@
 
 <script>
     $(document).ready(function (){
+
+        fetchCategories();
+
+        function fetchCategories() {
+            $.ajax({
+                type: "GET",
+                url: "/fetch",
+                dataType: "json",
+                success: function (response) {
+                    // console.log(response);
+                    $('tbody').html("");
+                    $.each(response.categories, function (key, item) {
+                        $('tbody').append('<tr>\
+                            <td>' + item.name + '</td>\
+                            <td><td><a href="#"><i class="fa-solid fa-trash-can"></a></td></td>\
+                        \</tr>');
+                    });
+                }
+            });
+        }
+        
         $(document).on('click', '.saveCategorie', function(e){
             e.preventDefault();
             //console.log("Event button Ok..");
@@ -115,6 +126,8 @@
                         $('#successMessage').text(response.message);
                         $('#saveCategorieModal').modal('hide');
                         $('#saveCategorieModal').find('input').val("");
+
+                        fetchCategories();
                     }
                 }
             });

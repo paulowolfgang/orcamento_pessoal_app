@@ -117,4 +117,13 @@ class CategorieController extends Controller
     {
         //
     }
+
+    public function fetchCategories()
+    {
+        $categories = Categorie::all();
+
+        return response()->json([
+            'categories'=>$categories,
+        ]);
+    }
 }

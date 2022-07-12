@@ -29,5 +29,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+### Categories routes ###
 Route::resource('categorie', CategorieController::class);
+Route::get('/fetch', [CategorieController::class, 'fetchCategories'])->name('fetch');
+
+### Payments routes ###
 Route::resource('payment', PaymentController::class);
