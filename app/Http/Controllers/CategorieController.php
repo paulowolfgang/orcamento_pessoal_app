@@ -115,7 +115,13 @@ class CategorieController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $categorie = Categorie::find($id);
+        $categorie->delete();
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Categoria removida com sucesso!'
+        ]);
     }
 
     public function fetchCategories()

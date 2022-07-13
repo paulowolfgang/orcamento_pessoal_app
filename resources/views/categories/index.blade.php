@@ -10,6 +10,7 @@
             <div class="col-8">
                 <h3>Categorias</h3>
             </div>
+
             <div class="col-4" style="text-align: right;">
 
                 <!-- ### Button trigger modal ### -->
@@ -18,8 +19,10 @@
                 </button>
             
             </div>
+
         </div>
     </div>
+
     <div class="container col-lg-12">
         <table class="table">
             <thead>
@@ -37,28 +40,49 @@
     <div class="modal fade" id="saveCategorieModal" tabindex="-1" aria-labelledby="saveCategorieModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Cadastrar Nova Categoria</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                
-                <!-- ### Modal error message ### -->
-                <ul id="errorMessage"></ul>
+                <div class="modal-header">
+                    <h5 class="modal-title">Cadastrar Nova Categoria</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
 
-                <div class="mb-3">
-                    <form action="{{ route('categorie.store') }}" class="formData" id="formData" enctype="multipart/form-data">
-                        @csrf
-                        <label for="exampleInput" class="form-label">Nome da categoria</label>
-                        <input type="text" class="name form-control">
-                        <div id="categorieHelp" class="form-text">Cadastre o nome da nova categoria, exemplo: Transporte...</div>
-                    </form>
+                <div class="modal-body">
+                    <!-- ### Modal error message ### -->
+                    <ul id="errorMessage"></ul>
+
+                    <div class="mb-3">
+                        <form action="{{ route('categorie.store') }}" class="formData" id="formData" enctype="multipart/form-data">
+                            @csrf
+                            <label for="exampleInput" class="form-label">Nome da categoria</label>
+                            <input type="text" class="name form-control">
+                            <div id="categorieHelp" class="form-text">Cadastre o nome da nova categoria, exemplo: Transporte...</div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success saveCategorie"><i class="fa-solid fa-circle-plus"></i> Cadastrar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-circle-xmark"></i> Fechar</button>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-success saveCategorie"><i class="fa-solid fa-circle-plus"></i> Cadastrar</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-circle-xmark"></i> Fechar</button>
-            </div>
+        </div>
+    </div>
+
+    <!-- ### Registration deletion modal ### -->
+    <div class="modal fade" id="deleteCategorieModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Remover Categoria</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4>Deseja realmente remover a categoria?</h4>
+                    <input type="hidden" id="delete_categorie_id">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger deleteCategorieBtnModal">Sim, remover!</button>
+                </div>
             </div>
         </div>
     </div>
@@ -83,7 +107,7 @@
                     $.each(response.categories, function (key, item) {
                         $('tbody').append('<tr>\
                             <td>' + item.name + '</td>\
-                            <td><td><a href="#"><i class="fa-solid fa-trash-can"></a></td></td>\
+                            <td><button type="button" value="' + item.id + '" class="btn btn-danger deleteCategorie btn-sm">Remover</button></td>\
                         \</tr>');
                     });
                 }
@@ -131,6 +155,43 @@
                     }
                 }
             });
+        });
+
+        $(document).on('click', '.deleteCategorie', function(e){
+            e.preventDefault();
+
+            var categorie_id = $(this).val();
+            //console.log(categorie_id);
+            $('#delete_categorie_id').val(categorie_id);
+            $('#deleteCategorieModal').modal('show');
+        });
+
+        $(document).on('click', '.deleteCategorieBtnModal', function(e){
+            e.preventDefault();
+
+            var categorie_id = $('#delete_categorie_id').val();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "DELETE",
+                url: "/categorie/"+categorie_id,
+                success: function(response){
+                    //console.log(response);
+
+                    $('#successMessage').addClass('alert alert-success');
+                    $('#successMessage').text(response.message);
+                    $('#deleteCategorieModal').modal('hide');
+
+                    fetchCategories();
+                }
+            });
+
+
         });
     });
 </script>
